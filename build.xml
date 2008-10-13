@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CobwebPlot2008" default="all" basedir=".">
+	<import file="../keystore.xml" />
+	<property name="keystore" location="../keystore.ks" />
+	<property name="out.dir" location="build" />
+
+	
+	<!-- Make all the jars and upload -->
+	<target name="all" depends="init,cobweb,resources,math" />
+	
+	<!-- Initialize the build process. -->
+	<target name="init">
+		<!-- make sure the output directory exists -->
+		<mkdir dir="${out.dir}" />
+	</target>
+	
+	<!-- Make the jar that contains only the classes -->
+	<target name="cobweb">
+		<jar destfile="${out.dir}/cobweb.jar">
+			<fileset dir="${basedir}/bin" includes="**/*.class" />
+		</jar>
+		<signjar alias="${keystore.alias}" storepass="${keystore.password}"
+			keystore="${keystore}" jar="${out.dir}/cobweb.jar" />
+	</target>
+	
+	<!-- make the resources jar -->
+	<target name="resources">  
+		<jar destfile="${out.dir}/resources.jar" 
+			basedir="${basedir}/resources" />
+		<signjar alias="${keystore.alias}" storepass="${keystore.password}" 
+			keystore="${keystore}" jar="${out.dir}/resources.jar" />  
+	</target>
+	
+	<!-- sign the MathToolKit jar -->
+	<target name="math">
+		<signjar alias="${keystore.alias}" storepass="${keystore.password}" 
+					keystore="${keystore}" jar="${out.dir}/MathToolKit.jar" />
+	</target>
+</project>
+
