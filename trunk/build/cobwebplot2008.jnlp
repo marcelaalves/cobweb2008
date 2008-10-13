@@ -15,7 +15,7 @@
 	</security>
 	<resources>
 		<j2se version="1.5+" />
-		<jar href="Cobweb2008.jar" />
+		<jar href="cobweb.jar" />
 		<jar href="resources.jar" />
 		<jar href="MathToolKit.jar" />
 	</resources>
